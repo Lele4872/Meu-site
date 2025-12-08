@@ -1,0 +1,93 @@
+#botaoMusica {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  background: hotpink;
+  border-radius: 50%;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 0, 100, 0.7);
+  animation: pulse 1.2s infinite;
+  z-index: 9999;
+}
+
+.texto-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  margin-top: 40px;
+}
+
+.texto-container .container {
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  text-align: center;
+  line-height: 1.7;
+  font-size: 1.05em;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* CONTAINER DO TEXTO - RESPONSIVO */
+.texto-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.container {
+  max-width: 800px;
+  background: rgba(255,255,255,0.03);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+}
+
+/* Ajuste dos parágrafos */
+.container p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  color: var(--muted);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.6em;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .container p {
+    font-size: 0.95rem;
+  }
+
+  #botaoMusica {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .galeria {
+    grid-template-columns: 1fr;
+  }
+}

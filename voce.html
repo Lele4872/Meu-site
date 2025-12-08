@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Você me ama?</title>
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --bg2: #071024;
+      --accent1: #ff8aa0;
+      --accent2: #ffd166;
+      --text: #e6eef8;
+      --muted: rgba(230,238,248,0.7);
+      --glass: rgba(255,255,255,0.04);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    .hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 920px;
+      padding: 28px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .left { flex: 1; min-width: 220px; }
+    .logo {
+      width: 84px;
+      height: 84px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #fff;
+    }
+
+    h1 { margin: 0 0 8px 0; font-size: 22px; }
+    p.lead { margin: 0 0 14px 0; color: var(--muted); line-height: 1.4; }
+
+    .right { display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 260px; }
+    .question {
+      width: 100%;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.02);
+      text-align: center;
+    }
+
+    .buttons {
+      margin-top: 10px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+    }
+
+    button.btn {
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 0;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 16px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.5);
+      background: transparent;
+      color: var(--text);
+      transition: transform 0.2s;
+    }
+
+    button.btn:hover {
+      transform: scale(1.05);
+    }
+
+    button#yes {
+      background: linear-gradient(90deg, #ff8aa0, #ff6b81);
+      color: white;
+    }
+
+    button#no {
+      
+      left: 66%;
+      top: 6px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    button#sobre {
+      background: linear-gradient(90deg, #ffd166, #ff8aa0);
+      color: white;
+      margin-top: 10px;
+    }
+
+    .reveal {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      color: var(--muted);
+      min-height: 48px;
+      white-space: pre-wrap;
+    }
+
+    @media (max-width: 700px) {
+      .card { flex-direction: column; padding: 18px; gap: 18px; }
+      .logo { width: 64px; height: 64px; font-size: 26px; }
+      h1 { font-size: 18px; }
+    }
+
+    .heart {
+      position: absolute;
+      width: var(--size, 20px);
+      height: var(--size, 20px);
+      transform: rotate(-45deg);
+      pointer-events: none;
+    }
+    .heart, .heart::before, .heart::after {
+      background: var(--color, #ff6b81);
+      border-radius: 50%;
+      display: block;
+    }
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    .heart::before { top: -50%; left: 0; }
+    .heart::after { top: 0; left: 50%; }
+  </style>
+</head>
+<body>
+  <div class="hearts" aria-hidden="true"></div>
+
+  <main class="card" role="main" aria-labelledby="titulo">
+    <div class="left">
+      <div style="display:flex; gap:16px; align-items:center;">
+        <div class="logo" aria-hidden="true">💖</div>
+        <div>
+          <h1 id="titulo">Feliz Aniversário gatinha!</h1>
+          <p class="lead">Amo vc!</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; display:grid; gap:10px;">
+        <div style="background:rgba(255,255,255,0.02); padding:12px; border-radius:10px;">
+          <strong style="display:block;color:var(--muted)">Para:</strong>
+          <input id="nome" value="O amor da minha vida." aria-label="Nome do destinatário"
+                 style="width:100%; background:transparent; color:var(--text); border:0; outline:none; font-size:18px; font-weight:700;" />
+          <small style="display:block;color:var(--muted); margin-top:6px">Já falei que Te amo?</small>
+        </div>
+
+        <div class="reveal" id="reveal">Clique em <strong>"Sim"</strong> quando quiser.</div>
+      </div>
+    </div>
+
+    <aside class="right" aria-label="Interação">
+      <div class="question" role="region" aria-live="polite">
+        <p class="q">Você me ama?</p>
+        <div class="buttons" id="buttonsWrap">
+          <button id="yes" class="btn" type="button" aria-label="Sim">Sim 💘</button>
+          <button id="no" class="btn" type="button" aria-label="Não">Não 😅</button>
+        </div>
+        <div class="footer-msg" style="color:var(--muted); font-size:14px; margin-top:6px;">Dica: tente clicar no "Não" 😉</div>
+      </div>
+        <button id="sobre" class="btn" type="button" aria-label="Sobre nós">💑 Sobre nós</button>
+        
+      <div style="font-size:13px; color:var(--muted); text-align:center; max-width:280px;">
+        Desenvolvido com carinho para a mulher do sorriso mais lindo de toda galáxia...
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+        var heartsContainer = document.querySelector('.hearts');
+        var reveal = document.getElementById('reveal');
+        var btnYes = document.getElementById('yes');
+        var btnNo = document.getElementById('no');
+        var btnSobre = document.getElementById('sobre');
+        var inputNome = document.getElementById('nome');
+        var buttonsWrap = document.getElementById('buttonsWrap');
+
+        btnSobre.addEventListener('click', function () {
+  window.location.href = "fotos.html";
+});
+
+function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function createHearts(count) {
+  var h = window.innerHeight;
+  for (var i = 0; i < count; i++) {
+    var el = document.createElement('div');
+    el.className = 'heart';
+    el.style.setProperty('--size', randInt(8, 36) + 'px');
+    el.style.setProperty('--color', 'rgb(255,' + randInt(90, 200) + ',' + randInt(130, 220) + ')');
+    el.style.left = Math.random() * 100 + '%';
+    el.style.top = (100 + Math.random() * 40) + '%';
+    heartsContainer.appendChild(el);
+    (function (node) {
+      var duration = 8000 + Math.random() * 8000;
+      node.animate([{ transform: 'translateY(0) rotate(-45deg) scale(1)' },
+                    { transform: 'translateY(-' + (h + 200) + 'px) rotate(-45deg) scale(.6)', opacity: 0 }],
+                   { duration: duration, easing: 'linear' });
+      setTimeout(function () { node.remove(); }, duration + 200);
+    })(el);
+  }
+
+        }
+        createHearts(12);
+        setInterval(() => createHearts(8), 2400);
+
+        function moveNoToCursor(x, y) {
+          var wrapRect = buttonsWrap.getBoundingClientRect();
+          var btnRect = btnNo.getBoundingClientRect();
+          var safePad = 8;
+          var maxX = wrapRect.width - btnRect.width - safePad * 2;
+          var maxY = wrapRect.height - btnRect.height - safePad * 2;
+          var tx = Math.random() * maxX + safePad;
+          var ty = Math.random() * maxY + safePad;
+          btnNo.style.left = tx + 'px';
+          btnNo.style.top = ty + 'px';
+        }
+
+        document.addEventListener('mousemove', function (e) {
+          var noRect = btnNo.getBoundingClientRect();
+          var dist = Math.hypot(e.clientX - (noRect.left + noRect.width/2), e.clientY - (noRect.top + noRect.height/2));
+          if (dist < 110) moveNoToCursor(e.clientX, e.clientY);
+        });
+
+        btnYes.addEventListener('click', function () {
+          var nome = (inputNome.value || 'Você').trim();
+          var messages = [
+           "Eu posso até não ser o Buzz Lightyear, mas com você eu vou ao infinito e além todos os dias."
+          ];
+          reveal.textContent = '';
+          let i = 0;
+          (function typeMsg() {
+            if (i < messages.length) {
+              const line = document.createElement('div');
+              reveal.appendChild(line);
+              let j = 0;
+              const text = messages[i];
+              const t = setInterval(() => {
+                line.textContent += text[j++];
+                if (j >= text.length) { clearInterval(t); i++; setTimeout(typeMsg, 600); }
+              }, 28);
+            }
+          })();
+        });
+      });
+    }());
+  </script>
+</body>
+</html>
+
